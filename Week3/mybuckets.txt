@@ -1,0 +1,5 @@
+Buckets and objects:
+
+Bucket: my-static-website-bucket-1928
+  error.html
+  index.html

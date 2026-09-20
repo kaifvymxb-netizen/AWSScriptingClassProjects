@@ -33,11 +33,12 @@ put_bucket_response = s3client.put_bucket_website(
     'IndexDocument': {'Suffix': 'index.html'}, 
     } 
 ) 
-file = "index.html"
-body = open(file, 'rb').read()
-s3client.put_object(
-    Body=body, 
-    Bucket=myBucketName, 
-    Key=file, 
-    ContentType='text/html' )
-file.close()
+html_files = ["index.html", "error.html"]
+for file in html_files:                                                                                                                                                                                                                      
+       with open(file, "rb") as f:                                                                                                                                                                                                              
+           body = f.read()                                                                                                                                                                                                                      
+           s3client.put_object(                                                                                                                                                                                                                 
+               Body=body,                                                                                                                                                                                                                       
+               Bucket=myBucketName,                                                                                                                                                                                                             
+               Key=file,                                                                                                                                                                                                                        
+               ContentType='text/html' )   
