@@ -1,0 +1,2 @@
+InstanceId,InstanceName,InstanceType,State,PublicIpAddress,MonitoringState
+i-015972a1f99505718,Week3Instance,t2.micro,stopped,N/A,disabled
