@@ -22,6 +22,20 @@ def main():
     give_tags_to_instance(instance_id, tags_to_addDict)#give tags to instance
     tag_description_text = describe_instance_tags(instance_id)
     print(tag_description_text)#print instance tags
+
+    # Test Get_Instances with instance-type filter
+    print("\n--- Testing Get_Instances filter ---")
+    reservations = Get_Instances('instance-type', 't2.micro')
+    for reservation in reservations:
+        for inst in reservation['Instances']:
+            name = ''
+            for tag in inst.get('Tags', []):
+                if tag['Key'] == 'Name':
+                    name = tag['Value']
+            print(f"Instance Name: {name}")
+            print(f"State: {inst['State']['Name']}")
+            print(f"Monitoring State: {inst['Monitoring']['State']}")
+
     #instance.terminate()
     #instance.wait_until_terminated()
     print(f"Instance {instance.id} has been terminated.")
@@ -76,9 +90,21 @@ def describe_instance_tags(instance_id):
     response = ec2.describe_tags(Filters=[{'Name': 'resource-id', 'Values': [instance_id]}])
     return response['Tags']
 
-def Get_Instances():
+def Get_Instances(Name, Value):
     ec2 = boto3.client('ec2')
-    response = ec2.describe_instances()
+    paginator = ec2.get_paginator('describe_instances')
+    page_list = paginator.paginate(
+        Filters=[
+            {
+                'Name': Name,
+                'Values': [Value],
+            },
+        ]
+    )
+    response = []
+    for page in page_list:
+        for reservation in page['Reservations']:
+            response.append(reservation)
     return response
 
 if __name__ == "__main__":
