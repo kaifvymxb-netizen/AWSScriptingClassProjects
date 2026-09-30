@@ -1,1 +1,18 @@
-Wrote 1 row(s) to export.csv
+Retreieval Successful.
+Latest Amazon Linux 2 AMI ID: ami-002db1d61667182d2
+EC2 Instance Creation Successful. Instance ID: i-066fcc60d05202099
+Instance ID: i-066fcc60d05202099
+State: running
+Public DNS: ec2-100-59-186-193.compute-1.amazonaws.com
+Public IP: 100.59.186.193
+Instance is now running and details are now updated.
+[{'Key': 'Name', 'ResourceId': 'i-066fcc60d05202099', 'ResourceType': 'instance', 'Value': 'Week3Instance'}, {'Key': 'OwnerName', 'ResourceId': 'i-066fcc60d05202099', 'ResourceType': 'instance', 'Value': 'Kai'}, {'Key': 'Week', 'ResourceId': 'i-066fcc60d05202099', 'ResourceType': 'instance', 'Value': 'Week3'}]
+
+--- Testing Get_Instances filter ---
+Instance Name: Week3Instance
+State: running
+Monitoring State: disabled
+Instance Name: Week3Instance
+State: running
+Monitoring State: disabled
+Instance i-066fcc60d05202099 has been terminated.

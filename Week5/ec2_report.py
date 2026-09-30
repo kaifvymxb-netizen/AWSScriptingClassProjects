@@ -33,13 +33,18 @@ def main():
             for tag in instance.get('Tags', []):
                 if tag['Key'] == 'Name':
                     name = tag['Value']
+            state = instance['State']['Name']
+            monitoring = instance['Monitoring']['State']
+            print(f"Instance Name: {name}")
+            print(f"State: {state}")
+            print(f"Monitoring State: {monitoring}")
             content.append({
                 'InstanceId': instance['InstanceId'],
                 'InstanceName': name,
                 'InstanceType': instance['InstanceType'],
-                'State': instance['State']['Name'],
+                'State': state,
                 'PublicIpAddress': instance.get('PublicIpAddress', "N/A"),
-                'MonitoringState': instance['Monitoring']['State'],
+                'MonitoringState': monitoring,
             })
     CSV_Writer(header, content)
     print(f"Wrote {len(content)} row(s) to export.csv")
