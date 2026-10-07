@@ -11,7 +11,7 @@ def main():
 
     image_id = ec2.get_latest_linux_2_ami()
 
-    instance_id = ec2.create_ec2_instance(image_id=image_id)
+    instance_id = ec2.create_ec2_instance(image_id, SecurityGroups=['WebSG'], KeyName='vockey', UserDataFile='user_data.txt')
 
     ec2_resource = boto3.resource('ec2')
     instance = ec2_resource.Instance(instance_id)
@@ -20,10 +20,10 @@ def main():
 
     topic_arn = SNS.create_sns_topic('LowCPUAlarm')
     SNS.subscribe_sns_topic(topic_arn, 'email', 'KaiFVy.mx.b@gmail.com')
-    put_metric_alarm(instance_id, account_id)
+    put_metric_alarm_low_usage(instance_id, account_id)
     print(f"Alarm for instance {instance_id} has been set.")
 
-def put_metric_alarm(instance_id, account_id):
+def put_metric_alarm_low_usage(instance_id, account_id):
     cw_client = boto3.client('cloudwatch')
     response = cw_client.put_metric_alarm( 
         AlarmName='Web_Server_LOW_CPU_Utilization', 
