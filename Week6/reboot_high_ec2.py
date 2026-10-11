@@ -36,6 +36,7 @@ def put_metric_alarm(instance_id, account_id):
         Threshold=70.0, 
         ActionsEnabled=True, 
         AlarmActions=[ 
+            f'arn:aws:sns:us-east-1:{account_id}:HighCPURebootAlarm',
             f'arn:aws:swf:us-east-1:{account_id}:action/actions/AWS_EC2.InstanceId.Reboot/1.0'
         ], 
         AlarmDescription='Alarm when server CPU is higher than 70%', 
