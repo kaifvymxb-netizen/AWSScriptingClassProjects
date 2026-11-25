@@ -1,0 +1,2 @@
+1. client.create_function( FunctionName="str",Role="str", Code={'ZipFile': b'bytes',
+        'S3Bucket': 'string'})
